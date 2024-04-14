@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body > nav > div > div > ul {
+    align-items: center;
+}
+
+.card > img {
+    height: fit-content;
+    margin-top: auto;
+    margin-bottom: auto;
+}
