@@ -1,4 +1,4 @@
-import CreateInstantRoom from "@/lib/component/CreateInstantRoom";
+import CreateInstantRoomModal from "@/lib/component/CreateInstantRoomModal";
 import { Card } from "flowbite-react";
 import Link from "next/link";
 
@@ -13,8 +13,7 @@ export default function Home() {
         No ads, no costs, just create an instant room and make your planning
         easier
       </p>
-      {/* <Name on:submit={onNameSubmit} show={nameModal} /> */}
-      <CreateInstantRoom />
+      <CreateInstantRoomModal />
       <div className="flex-row space-y-6">
         <Card
           imgSrc="/images/undraw/01undraw_preparation_re_t0ce.svg"
@@ -148,8 +147,8 @@ export default function Home() {
           </h5>
           <p className="mb-3 font-normal leading-tight text-gray-700 dark:text-gray-400">
             The final estimation agreed upon by the team is recorded for the
-            user story. It's important to document these estimates for future
-            reference, planning, and tracking progress.
+            user story. It&aposs important to document these estimates for
+            future reference, planning, and tracking progress.
           </p>
         </Card>
         <Card

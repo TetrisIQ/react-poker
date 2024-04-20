@@ -50,48 +50,20 @@ export async function POST(
     });
 }
 
-// estimate
-// api/room/abc?alex=3
+// Show room
 export async function PUT(
   request: Request,
   { params }: { params: { name: string } },
 ) {
-  const urlParams = new URLSearchParams(request.url);
-  const user = urlParams.get("user");
-  const newEstimation: string | null = urlParams.get("estimation");
-  if (user == null && newEstimation == null) {
-    return NextResponse.json(
-      { message: "You must provide a user and estimation as parameters" },
-      { status: 400 },
-    );
-  }
-  console.log(`${user} has made a new Estimation with ${newEstimation}: `);
   // get room from db
   const existingRoom = await prisma.room.findFirst({
     where: { name: params.name },
   });
-  const participants: Array<Participant> = await prisma.participant.findMany({
-    where: { roomId: existingRoom?.id },
+  // toggle show state
+  const roomUpdate = await prisma.room.update({
+    where: { id: existingRoom?.id },
+    data: { show: !Boolean(existingRoom?.show) },
   });
-  let me: Participant | undefined = participants.find((p) => p.name === user);
-  // new User
-  if (me === undefined) {
-    me = await prisma.participant.create({
-      //@ts-ignore
-      data: {
-        name: user!,
-        estimate: newEstimation!,
-        roomId: existingRoom?.id,
-      },
-    });
-    participants.push(me);
-    return Response.json(participants);
-  }
-  // existing user
-  me.estimate = newEstimation!;
-  await prisma.participant.update({
-    where: { id: me.id },
-    data: me,
-  });
-  return Response.json(participants);
+
+  return Response.json(roomUpdate);
 }

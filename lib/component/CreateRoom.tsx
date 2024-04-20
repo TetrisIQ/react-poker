@@ -3,7 +3,7 @@
 import { Button } from "flowbite-react";
 import { generateUsername } from "unique-username-generator";
 
-async function createInstantRoom() {
+export async function createRoom() {
   const roomName =
     generateUsername("-") + "-" + Math.floor(Math.random() * 999);
   await fetch(`api/room/${roomName}/`, {
@@ -20,10 +20,10 @@ async function createInstantRoom() {
     .catch((err) => console.error(err));
 }
 
-export default function CreateInstantRoom() {
+export default function CreateRoom() {
   return (
-    <Button onClick={createInstantRoom} className="mb-8">
-      Create Instant Room
+    <Button onClick={createRoom} className="mb-8">
+      Create Room
     </Button>
   );
 }
