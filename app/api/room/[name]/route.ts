@@ -25,7 +25,7 @@ export async function GET(
       },
     );
   }
-  return Response.json({
+  return NextResponse.json({
     room,
   });
 }
@@ -37,12 +37,12 @@ export async function POST(
 ) {
   return await createRoomInDb(params.name)
     .then((res) => {
-      return Response.json({
+      return NextResponse.json({
         room: res,
       });
     })
     .catch((err) => {
-      return Response.json({
+      return NextResponse.json({
         message:
           "Cannot create a room. Maybe the name already exists. Try to create an instant room or choose a diffrent name",
         error: err,
@@ -65,5 +65,5 @@ export async function PUT(
     data: { show: !Boolean(existingRoom?.show) },
   });
 
-  return Response.json(roomUpdate);
+  return NextResponse.json(roomUpdate);
 }
