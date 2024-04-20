@@ -2,7 +2,6 @@ import winston from "winston";
 // export const dynamic = 'force-dynamic' // defaults to auto
 import { Participant, PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
-import { NextApiRequest } from "next";
 
 const prisma = new PrismaClient();
 
@@ -11,7 +10,7 @@ const logger = winston.createLogger({
 });
 
 export async function PUT(
-  request: NextApiRequest,
+  request: Request,
   { params }: { params: { name: string; user: string } },
 ) {
   const estimation = new URLSearchParams(request.url).get("estimation");
