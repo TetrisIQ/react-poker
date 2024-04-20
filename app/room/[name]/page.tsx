@@ -8,13 +8,13 @@ import { generateUsername } from "unique-username-generator";
 
 export default function Page({ params }: { params: { name: string } }) {
   let name: string | null = "";
-  if (typeof window !== "undefined") {
-    name = window.localStorage.getItem("name");
+  useEffect(() => {
+    let name = window.localStorage.getItem("name");
     if (name === null) {
       name = generateUsername(" ");
       window.localStorage.setItem("name", name);
     }
-  }
+  }, []);
 
   const fetcher = () =>
     fetch(`/api/room/${params.name}`).then((res) => res.json());

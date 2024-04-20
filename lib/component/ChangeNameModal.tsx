@@ -6,8 +6,10 @@ import EditIcon from "./EditIcon";
 
 export default function ChangeNameModal() {
   const [openModal, setOpenModal] = useState(false);
-
-  const localstorageName: string | null = window.localStorage.getItem("name");
+  let localstorageName: string | null = null;
+  if (typeof window !== "undefined") {
+    localstorageName = window.localStorage.getItem("name");
+  }
   const [name, setName] = useState(
     localstorageName === null ? "" : localstorageName,
   );
@@ -21,7 +23,7 @@ export default function ChangeNameModal() {
     window.localStorage.setItem("name", name);
     console.log(name);
     onCloseModal();
-    window.location.reload(); // update ui etc.
+    window.location.reload(); // update ui etc./
   }
 
   return (

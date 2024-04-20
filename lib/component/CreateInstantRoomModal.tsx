@@ -6,8 +6,11 @@ import { createRoom } from "./CreateRoom";
 
 export default function NameModal() {
   const [openModal, setOpenModal] = useState(false);
+  let localstorageName: string | null = null;
+  if (typeof window !== "undefined") {
+  localstorageName = window.localStorage.getItem("name");
+  }
 
-  const localstorageName: string | null = window.localStorage.getItem("name");
   const [name, setName] = useState(
     localstorageName === null ? "" : localstorageName,
   );
